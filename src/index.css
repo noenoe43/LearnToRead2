@@ -1,0 +1,150 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Configuration */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --ring: 224 71% 4%;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-comic font-bold;
+  }
+}
+
+/* Kid-friendly styles */
+.kid-container {
+  @apply container mx-auto px-4;
+}
+
+.kid-card {
+  @apply rounded-xl shadow-lg overflow-hidden border-2 border-blue-100 dark:border-blue-900 transition-all;
+}
+
+.dark .kid-card {
+  @apply bg-gray-800 text-white border-blue-800;
+}
+
+.kid-button {
+  @apply rounded-full px-6 py-2 text-white font-bold bg-blue-500 hover:bg-blue-600 transition-all;
+}
+
+.dark .kid-button {
+  @apply bg-blue-600 hover:bg-blue-700;
+}
+
+/* Theme colors */
+.dark .bg-kid-blue {
+  @apply bg-blue-900;
+}
+
+.dark .from-kid-blue {
+  @apply from-blue-900;
+}
+
+.dark .to-blue-100, .dark .to-blue-300 {
+  @apply to-blue-900;
+}
+
+/* Fix for circular dependency */
+.dark .bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #1e3a8a;
+  --tw-gradient-to: #172554;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.dark .bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+  --tw-gradient-from: #1e3a8a;
+  --tw-gradient-to: #172554;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .text-gray-800 {
+  @apply text-gray-200;
+}
+
+.dark .text-gray-600, .dark .text-gray-500 {
+  @apply text-gray-400;
+}
+
+.dark .bg-blue-50 {
+  @apply bg-blue-900/30;
+}
+
+.dark .bg-red-50 {
+  @apply bg-red-900/30;
+}
+
+.dark .border-gray-300 {
+  @apply border-gray-700;
+}
+
+.dark .border-gray-200 {
+  @apply border-gray-700;
+}
+
+.dark .bg-gray-200, .dark .bg-gray-100 {
+  @apply bg-gray-700;
+}
+
+/* Logo text styling */
+.logo-text {
+  @apply font-comic text-3xl font-bold;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+}
