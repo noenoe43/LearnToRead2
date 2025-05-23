@@ -114,8 +114,7 @@ const DonationForm: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-  
-  // Formateadores para los campos de tarjeta
+
   const formatCardNumber = (value: string) => {
     const numeric = value.replace(/[^\d]/g, '');
     return numeric.substring(0, 16);

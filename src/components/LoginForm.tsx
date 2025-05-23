@@ -26,8 +26,7 @@ const LoginForm: React.FC = () => {
         .maybeSingle();
       
       if (error) throw error;
-      
-      // Si no hay resultados (data es null), el usuario no ha realizado el test
+
       if (!data) {
         toast({
           title: "¡Bienvenido!",
@@ -44,7 +43,6 @@ const LoginForm: React.FC = () => {
       }
     } catch (error) {
       console.error("Error al verificar estado del test:", error);
-      // In case of error during login, redirect to profile by default
       navigate('/profile');
     }
   };
@@ -57,22 +55,18 @@ const LoginForm: React.FC = () => {
       setFormError('Por favor, ingresa tu email y contraseña');
       return;
     }
-    
     try {
       await signIn(email, password);
-      
-      // Verificar si el usuario ha completado el test después del login exitoso
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
         await checkTestStatus(user.id);
       } else {
-        // Si no podemos obtener el usuario, redirigimos al perfil por defecto
+
         navigate('/profile');
       }
     } catch (error) {
       console.error('Error en inicio de sesión:', error);
-      // El error ya se muestra en un toast desde useAuth
     }
   };
 

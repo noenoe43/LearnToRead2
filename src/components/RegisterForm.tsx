@@ -48,7 +48,7 @@ const RegisterForm: React.FC = () => {
       const response = await signUp(email, password, { username: name });
       
       if (response && response.user) {
-        // Nuevo usuario, siempre al test diagnóstico
+
         toast({
           title: "¡Bienvenido!",
           description: "Para poder personalizar tu experiencia, te invitamos a realizar un breve test diagnóstico.",
