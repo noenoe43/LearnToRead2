@@ -256,10 +256,10 @@ const DiagnosticTest: React.FC = () => {
       .map(([key]) => key);
     
     const areaNames = {
-      reading: 'lectura',
-      writing: 'escritura',
-      math: 'matemáticas',
-      memory: 'memoria'
+      reading: 'Lectura',
+      writing: 'Escritura',
+      math: 'Matemáticas',
+      memory: 'Memoria'
     };
     
     return {

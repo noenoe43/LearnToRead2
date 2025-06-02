@@ -24,22 +24,34 @@ const ReadingExercise: React.FC = () => {
   const { setExerciseContext, updateDailyStreak } = useChatbot();
 
   const normalText = [
-    "El", "zorro", "marrón", "saltó", "rápidamente", "sobre", "el", "perro", "perezoso.", 
-    "Luego,", "corrió", "hacia", "el", "bosque", "buscando", "nuevas", "aventuras.", 
-    "A", "los", "niños", "les", "encantaba", "observar", "a", "los", "animales", 
-    "jugar", "libremente", "en", "el", "parque."
+    "El", "zorro", "marrón", "saltó", "rápidamente", "sobre", "el", "perro", "perezoso.",
+    "Luego,", "corrió", "hacia", "el", "bosque", "buscando", "nuevas", "aventuras.",
+    "A", "los", "niños", "les", "encantaba", "observar", "a", "los", "animales",
+    "jugar", "libremente", "en", "el", "parque.",
+    "La", "niña", "cantaba", "una", "canción", "alegre", "mientras", "pintaba", "con", "colores.",
+    "El", "viento", "movía", "las", "hojas", "de", "los", "árboles", "con", "suavidad.",
+    "Un", "gato", "gris", "dormía", "tranquilo", "sobre", "una", "alfombra", "roja.",
+    "Los", "pájaros", "volaban", "alto", "en", "el", "cielo", "azul", "de", "la", "mañana.",
+    "Caminaron", "juntos", "por", "la", "playa", "coleccionando", "conchas", "de", "muchos", "colores.",
+    "En", "la", "escuela", "los", "alumnos", "aprendían", "palabras", "nuevas", "y", "jugaban", "en", "el", "recreo."
   ];
 
+
   const dyslexiaText = [
-    "Las", "letras", "bailan", "en", "la", "página", "como", "si", "tuvieran", "vida", 
-    "propia.", "Para", "muchos", "niños", "con", "dislexia,", "cada", "palabra", "es", 
-    "un", "desafío", "que", "requiere", "concentración", "extra.", "La", "b", "y", "la", 
-    "d", "se", "confunden,", "mientras", "que", "la", "p", "y", "la", "q", "parecen", 
-    "gemelas."
+    "Debajo", "del", "puente", "de", "madera", "brillaban", "burbujas", "doradas",
+    "que", "subían", "desde", "el", "fondo", "del", "lago.",
+    "Mientras", "Paula", "buscaba", "su", "pañuelo", "perdido,",
+    "Pedro", "pintaba", "dibujos", "con", "montañas", "y", "nubes.",
+    "La", "llama", "bailaba", "con", "el", "viento,",
+    "y", "una", "gallina", "gritaba", "junto", "al", "jardín,",
+    "donde", "jugaban", "los", "niños.",
+    "Quico", "quería", "quedarse", "quieto,",
+    "pero", "el", "ruido", "de", "la", "lluvia", "lo", "ponía", "nervioso.",
+    "Yolanda", "miraba", "el", "cielo", "gris", "y", "sostenía",
+    "una", "llave", "brillante", "cerca", "del", "parque."
   ];
 
   useEffect(() => {
-    // Set exercise context for chatbot
     setExerciseContext({
       currentExercise: {
         id: 'reading-1',
@@ -49,7 +61,6 @@ const ReadingExercise: React.FC = () => {
     });
 
     return () => {
-      // Clear exercise context and interval when component unmounts
       setExerciseContext(null);
       if (intervalRef.current) {
         clearInterval(intervalRef.current);

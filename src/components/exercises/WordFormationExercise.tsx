@@ -255,7 +255,6 @@ const WordFormationExercise: React.FC = () => {
       });
     }
     
-    // Generar una nueva pregunta después de un pequeño retraso
     setTimeout(() => {
       generateRealWordsQuestion();
     }, 1500);
@@ -286,7 +285,6 @@ const WordFormationExercise: React.FC = () => {
       });
     }
     
-    // Generar una nueva pregunta después de un pequeño retraso
     setTimeout(() => {
       generateJumbledWordsQuestion();
     }, 1500);
@@ -311,7 +309,6 @@ const WordFormationExercise: React.FC = () => {
       });
     }
     
-    // Generar una nueva pregunta después de un pequeño retraso
     setTimeout(() => {
       generateFindLetterQuestion();
     }, 1500);

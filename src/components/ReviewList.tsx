@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 
-// Tipo para las valoraciones
+
 type Review = {
   id: number | string;
   name: string;
@@ -18,7 +18,6 @@ type Review = {
   avatar: string;
 };
 
-// Datos de ejemplo para las valoraciones iniciales (fallback if database is empty)
 const initialReviews = [
   {
     id: 1,
@@ -90,12 +89,10 @@ const ReviewList: React.FC = () => {
     }
   };
   
-  // Load initial reviews
   useEffect(() => {
     fetchReviews();
   }, [page]);
   
-  // Listen for new reviews
   useEffect(() => {
     const handleNewReview = () => {
       // Reset to first page and reload
@@ -107,7 +104,6 @@ const ReviewList: React.FC = () => {
     return () => window.removeEventListener('new-review-added', handleNewReview);
   }, []);
   
-  // Función para cargar más reviews
   const loadMoreReviews = () => {
     setPage(prev => prev + 1);
   };

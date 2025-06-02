@@ -10,7 +10,6 @@ import { supabase } from '@/integrations/supabase/client';
 import useAuth from '@/hooks/useAuth';
 import { useChatbot } from '@/components/ChatbotProvider';
 
-// Importamos el componente de reconocimiento de voz de DictationExercise
 interface SpeechRecognitionEvent {
   results: {
     [index: number]: {
@@ -170,7 +169,6 @@ const PhonicAwarenessExercise: React.FC = () => {
         setTranscript(transcript);
         setAttempts(prev => prev + 1);
         
-        // Comprobar si la transcripción coincide con la palabra actual
         const isCorrect = transcript.trim().toLowerCase() === currentWord.toLowerCase();
         
         if (isCorrect) {

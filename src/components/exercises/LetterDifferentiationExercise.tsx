@@ -28,40 +28,40 @@ const LetterDifferentiationExercise: React.FC = () => {
     bd: {
       letters: ['b', 'd'],
       words: [
-        { word: 'bote', correct: 'b' },
-        { word: 'dedo', correct: 'd' },
-        { word: 'bebé', correct: 'b' },
-        { word: 'dado', correct: 'd' },
-        { word: 'boda', correct: 'b' },
-        { word: 'ducha', correct: 'd' },
-        { word: 'barco', correct: 'b' },
-        { word: 'dama', correct: 'd' }
+        { word: 'barril', correct: 'b' },
+        { word: 'dedal', correct: 'd' },
+        { word: 'bisagra', correct: 'b' },
+        { word: 'doblaje', correct: 'd' },
+        { word: 'bombilla', correct: 'b' },
+        { word: 'desván', correct: 'd' },
+        { word: 'brindis', correct: 'b' },
+        { word: 'dificultad', correct: 'd' }
       ]
     },
     pq: {
       letters: ['p', 'q'],
       words: [
-        { word: 'pato', correct: 'p' },
-        { word: 'queso', correct: 'q' },
-        { word: 'papel', correct: 'p' },
-        { word: 'quince', correct: 'q' },
-        { word: 'prisa', correct: 'p' },
-        { word: 'química', correct: 'q' },
-        { word: 'pera', correct: 'p' },
-        { word: 'querer', correct: 'q' }
+        { word: 'previsión', correct: 'p' },
+        { word: 'quimérico', correct: 'q' },
+        { word: 'precipicio', correct: 'p' },
+        { word: 'quirúrgico', correct: 'q' },
+        { word: 'persiana', correct: 'p' },
+        { word: 'quemadura', correct: 'q' },
+        { word: 'perplejo', correct: 'p' },
+        { word: 'quedarse', correct: 'q' }
       ]
     },
     mn: {
       letters: ['m', 'n'],
       words: [
-        { word: 'mesa', correct: 'm' },
-        { word: 'nube', correct: 'n' },
-        { word: 'mano', correct: 'm' },
-        { word: 'nido', correct: 'n' },
-        { word: 'mapa', correct: 'm' },
-        { word: 'nave', correct: 'n' },
-        { word: 'mundo', correct: 'm' },
-        { word: 'noche', correct: 'n' }
+        { word: 'murmullo', correct: 'm' },
+        { word: 'nebulosa', correct: 'n' },
+        { word: 'madrugada', correct: 'm' },
+        { word: 'narrador', correct: 'n' },
+        { word: 'misterio', correct: 'm' },
+        { word: 'nervioso', correct: 'n' },
+        { word: 'mecánico', correct: 'm' },
+        { word: 'notación', correct: 'n' }
       ]
     }
   };
@@ -84,7 +84,6 @@ const LetterDifferentiationExercise: React.FC = () => {
   }, [activeTab]);
 
   useEffect(() => {
-    // Si se completan 10 intentos, marcar el ejercicio como completado
     if (attempts >= 10 && !exerciseCompleted) {
       setExerciseCompleted(true);
       
@@ -182,7 +181,6 @@ const LetterDifferentiationExercise: React.FC = () => {
       });
     }
     
-    // Generar una nueva pregunta después de un pequeño retraso
     setTimeout(() => {
       generateQuestion();
     }, 1500);

@@ -9,7 +9,6 @@ import { supabase } from '@/integrations/supabase/client';
 import useAuth from '@/hooks/useAuth';
 import { useChatbot } from '@/components/ChatbotProvider';
 
-// Define the SpeechRecognition type to fix TypeScript errors
 interface SpeechRecognitionEvent {
   results: {
     [index: number]: {
@@ -31,7 +30,6 @@ interface SpeechRecognitionInstance extends EventTarget {
   onresult: (event: SpeechRecognitionEvent) => void;
 }
 
-// Add window interfaces for speech recognition
 declare global {
   interface Window {
     SpeechRecognition?: new () => SpeechRecognitionInstance;
@@ -51,7 +49,6 @@ const DictationExercise: React.FC = () => {
   const { user } = useAuth();
   const { setExerciseContext, updateDailyStreak } = useChatbot();
   
-  // Lista de palabras para el ejercicio
   const words = [
     'bruja',     // tiene "br" y "j"
     'queso',     // "qu" y "s"
@@ -67,7 +64,6 @@ const DictationExercise: React.FC = () => {
     'globo',     // "gl" y "b"
   ];
 
-  // Lista de pseudopalabras para un nivel más avanzado
   const pseudowords = [
     'blarino',  // bl + estructura natural
     'pralute',  // pr + final inusual
@@ -84,7 +80,6 @@ const DictationExercise: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Set exercise context for chatbot
     setExerciseContext({
       currentExercise: {
         id: 'dictation-1',
@@ -93,17 +88,14 @@ const DictationExercise: React.FC = () => {
       }
     });
 
-    // Iniciar el tiempo cuando se carga el ejercicio
     setStartTime(new Date());
 
     return () => {
-      // Clear exercise context when component unmounts
       setExerciseContext(null);
     };
   }, []);
 
   useEffect(() => {
-    // Update chatbot context when exercise is completed
     if (exerciseCompleted) {
       const isPerfectScore = score === totalAttempts;
       const pointsEarned = isPerfectScore ? 100 : Math.round((score / totalAttempts) * 50);
@@ -121,11 +113,9 @@ const DictationExercise: React.FC = () => {
         }
       });
 
-      // Save exercise result if user is logged in
       if (user) {
         saveExerciseResult(pointsEarned);
         
-        // Actualizar racha diaria
         updateDailyStreak().then(newStreak => {
           toast({
             title: "¡Racha actualizada!",
@@ -139,7 +129,6 @@ const DictationExercise: React.FC = () => {
 
   const saveExerciseResult = async (pointsEarned: number) => {
     try {
-      // Calcular el tiempo que tomó completar el ejercicio
       const completionTime = startTime ? Math.round((new Date().getTime() - startTime.getTime()) / 1000) : 0;
       
       const { error } = await supabase.from('exercise_results').insert({

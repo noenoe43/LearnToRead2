@@ -43,7 +43,6 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
   const { setPageContext, pageContext } = useChatbot();
   const location = useLocation();
 
-  // Set current page context for the chatbot with more detailed information
   useEffect(() => {
     const path = location.pathname;
     let pageInfo = '';
@@ -110,7 +109,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
       } else if (pageContext) {
         welcomeMessage += `Estás en la ${pageContext}. ¿Tienes alguna pregunta o necesitas ayuda para navegar por esta sección?`;
       } else {
-        welcomeMessage += '¿En qué puedo ayudarte hoy? Puedo explicarte cualquier sección de la aplicación o responder preguntas sobre la dislexia y métodos de aprendizaje.';
+        welcomeMessage += '¿En qué puedo ayudarte hoy?Sobre Nosotros|Ayudar a mi hijo en casa|Secciones|Donar|Biblioteca|Perfil';
       }
       
       setMessages([
@@ -229,15 +228,13 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
 
   return (
     <>
-      {/* Botón flotante para abrir/cerrar el chat con un ícono más informativo */}
       <Button
         onClick={toggleChat}
         className={`fixed bottom-5 right-5 rounded-full p-3 shadow-lg z-50 ${isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'}`}
       >
         {isOpen ? <Bot size={24} /> : <LightbulbIcon size={24} />}
       </Button>
-      
-      {/* Ventana de chat más amigable */}
+
       <div 
         className={`fixed bottom-20 right-5 z-50 w-[350px] md:w-[400px] transition-transform duration-300 ${
           isOpen ? 'transform translate-y-0' : 'transform translate-y-[150%]'
@@ -252,7 +249,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
           </div>
           
           <CardContent className="p-0">
-            {/* Mensajes */}
+
             <div className="h-[350px] overflow-y-auto p-4 space-y-4 bg-blue-50">
               {messages.map((message) => (
                 <div 
@@ -284,7 +281,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
                 </div>
               ))}
               
-              {/* Sugerencias de ejercicios */}
+
               {suggestions.length > 0 && (
                 <div className="my-2 pl-10">
                   <p className="text-sm text-blue-700 font-medium mb-2">Ejercicios recomendados:</p>
@@ -308,8 +305,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
                   </div>
                 </div>
               )}
-              
-              {/* Indicador de carga */}
+
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-white rounded-lg p-3 flex items-center border border-blue-200">
@@ -322,7 +318,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
               <div ref={messagesEndRef} />
             </div>
             
-            {/* Formulario de entrada más amigable */}
+
             <form onSubmit={handleSubmit} className="border-t border-blue-200 p-3 flex gap-2 bg-white rounded-b-xl">
               <Input
                 value={input}
