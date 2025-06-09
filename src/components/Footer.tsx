@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="kid-container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">DislexiDiversión</h3>
+            <h3 className="text-xl font-bold mb-4">LearnToRead</h3>
             <p className="text-gray-600">
               Ayudando a niños con dislexia a aprender de forma divertida y efectiva
             </p>
