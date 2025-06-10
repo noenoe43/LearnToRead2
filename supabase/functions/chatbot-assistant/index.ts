@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
+
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -74,7 +74,6 @@ serve(async (req) => {
         response = `Estás trabajando en el ejercicio "${contextData.currentExercise.title}". Este tipo de ejercicios ayuda a desarrollar tu ${contextData.currentExercise.type === 'fonológico' ? 'conciencia fonológica y reconocimiento de sonidos' : contextData.currentExercise.type === 'visual' ? 'discriminación visual y reconocimiento de letras' : 'habilidades de comprensión lectora'}. ¿En qué parte necesitas ayuda?`;
       } else {
         response = "Tenemos varios tipos de ejercicios diseñados para ayudarte con diferentes aspectos de la lectura y escritura. Incluyen actividades de conciencia fonológica, discriminación visual, formación de palabras y comprensión lectora. Cada uno está diseñado para ser divertido a la vez que educativo. ¿Quieres que te recomiende algunos ejercicios?";
-        // Fetch recommended exercises based on user profile
         try {
           const { data: exercises } = await supabase
               .from('exercises')

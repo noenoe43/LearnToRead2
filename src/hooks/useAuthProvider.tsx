@@ -12,19 +12,16 @@ export const useAuthProvider = () => {
   const [lastActive, setLastActive] = useState<Date | null>(null);
 
   useEffect(() => {
-    // Set up auth state listener first
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
         (event, currentSession) => {
           setSession(currentSession);
           setUser(currentSession?.user ?? null);
 
           if (event === 'SIGNED_IN' && currentSession?.user) {
-            // Fetch user profile when signed in
             fetchUserProfile(currentSession.user.id).then(data => {
               if (data) setProfile(data);
             });
             setLastActive(new Date());
-            // Update daily streak on login
             updateDailyStreakOnLogin(currentSession.user.id);
           } else if (event === 'SIGNED_OUT') {
             setProfile(null);
@@ -34,7 +31,6 @@ export const useAuthProvider = () => {
         }
     );
 
-    // Then check for existing session
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
@@ -45,7 +41,6 @@ export const useAuthProvider = () => {
         });
         setLastActive(new Date());
         localStorage.setItem('user-authenticated', 'true');
-        // Update daily streak on session restore
         updateDailyStreakOnLogin(currentSession.user.id);
       }
 
@@ -57,7 +52,6 @@ export const useAuthProvider = () => {
     };
   }, []);
 
-  // Track user activity
   useEffect(() => {
     if (!user) return;
 
@@ -71,10 +65,8 @@ export const useAuthProvider = () => {
     return () => clearInterval(activityInterval);
   }, [user, lastActive]);
 
-  // Function to update daily streak on login
   const updateDailyStreakOnLogin = async (userId: string) => {
     try {
-      // Get current profile data
       const { data: currentProfile, error: fetchError } = await supabase
           .from('profiles')
           .select('daily_streak, last_streak_update')
@@ -89,7 +81,6 @@ export const useAuthProvider = () => {
       const today = new Date();
       const lastUpdate = currentProfile?.last_streak_update ? new Date(currentProfile.last_streak_update) : null;
 
-      // Check if we should update the streak
       let shouldUpdateStreak = false;
       let newStreak = 1;
 
@@ -111,17 +102,14 @@ export const useAuthProvider = () => {
           shouldUpdateStreak = true;
 
           if (lastUpdateDate.getTime() === yesterdayDate.getTime()) {
-            // Last update was yesterday, increment streak
             newStreak = (currentProfile.daily_streak || 0) + 1;
           } else {
-            // Last update was more than a day ago, reset streak
             newStreak = 1;
           }
         }
       }
 
       if (shouldUpdateStreak) {
-        // Update the streak in database
         const { error: updateError } = await supabase
             .from('profiles')
             .update({
@@ -135,14 +123,12 @@ export const useAuthProvider = () => {
         } else {
           console.log('Daily streak updated to:', newStreak);
 
-          // Update local profile state
           setProfile(prev => prev ? {
             ...prev,
             daily_streak: newStreak,
             last_streak_update: today.toISOString()
           } : null);
 
-          // Show toast for streak milestone
           if (newStreak > 1) {
             toast({
               title: `¡Racha de ${newStreak} días! 🔥`,

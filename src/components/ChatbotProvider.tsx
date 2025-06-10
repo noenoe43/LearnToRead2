@@ -34,12 +34,11 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
     setPageContextState(context);
   };
 
-  // Cargar la racha diaria al iniciar
+
   useEffect(() => {
     if (user) {
       loadDailyStreak();
     } else {
-      // Si no hay usuario autenticado, cargar desde localStorage
       const localStreak = parseInt(localStorage.getItem('user-streak') || '0');
       setDailyStreak(localStreak);
     }
@@ -58,11 +57,9 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (error) throw error;
       
       if (data) {
-        // Verificar si la racha diaria se actualizó hoy
         const lastUpdate = data.last_streak_update ? new Date(data.last_streak_update) : null;
         const today = new Date();
         
-        // Si no hay actualización o fue hace más de un día, actualizar la fecha
         if (!lastUpdate || !isSameDay(lastUpdate, today)) {
           // No actualizamos el contador aquí, solo cuando se completa un ejercicio
           setDailyStreak(data.daily_streak || 0);
@@ -76,7 +73,6 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
     }
   };
 
-  // Función para determinar si dos fechas son el mismo día
   const isSameDay = (date1: Date, date2: Date) => {
     return date1.getFullYear() === date2.getFullYear() &&
            date1.getMonth() === date2.getMonth() &&
@@ -84,7 +80,6 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
   };
 
   const updateDailyStreak = async () => {
-    // Actualizar tanto en estado local como en Supabase
     const newStreak = dailyStreak + 1;
     setDailyStreak(newStreak);
     localStorage.setItem('user-streak', newStreak.toString());
@@ -109,10 +104,8 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
     return newStreak;
   };
 
-  // New function to add points to the user profile
   const addPoints = async (points: number, reason?: string) => {
     if (!user) {
-      // Store in localStorage for non-authenticated users
       const currentPoints = parseInt(localStorage.getItem('user-points') || '0');
       const newPoints = currentPoints + points;
       localStorage.setItem('user-points', newPoints.toString());
@@ -128,7 +121,6 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
     }
     
     try {
-      // Use the increment_points function we created in the database
       const { data, error } = await supabase
         .rpc('increment_points', { 
           user_uuid: user.id,
@@ -137,7 +129,6 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
       
       if (error) throw error;
       
-      // Show toast notification
       toast({
         title: `¡Has ganado ${points} puntos!`,
         description: reason || 'Sigue practicando para ganar más.',

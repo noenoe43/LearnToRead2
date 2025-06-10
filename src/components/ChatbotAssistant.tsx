@@ -101,7 +101,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
         }
       ]);
     } else if (messages.length === 0 && !loading && !initialMessage) {
-      // Welcome message based on current page with more helpful context
+
       let welcomeMessage = '¡Hola! Soy tu asistente virtual de LearnToRead. ';
       
       if (location.pathname === '/about') {
@@ -109,7 +109,7 @@ const ChatbotAssistant: React.FC<ChatbotProps> = ({ initialMessage, contextData 
       } else if (pageContext) {
         welcomeMessage += `Estás en la ${pageContext}. ¿Tienes alguna pregunta o necesitas ayuda para navegar por esta sección?`;
       } else {
-        welcomeMessage += '¿En qué puedo ayudarte hoy?Sobre Nosotros|Ayudar a mi hijo en casa|Secciones|Donar|Biblioteca|Perfil';
+        welcomeMessage += '¿En qué puedo ayudarte hoy?';
       }
       
       setMessages([

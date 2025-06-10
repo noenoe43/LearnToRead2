@@ -9,19 +9,16 @@ const corsHeaders = {
 };
 
 serve(async (req: Request) => {
-  // Handle CORS
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    // Initialize the Supabase client
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Create the avatars bucket if it doesn't exist
     const { data: bucketData, error: bucketError } = await supabaseClient.storage.getBucket('avatars');
     
     if (!bucketData && !bucketError) {
@@ -56,14 +53,12 @@ serve(async (req: Request) => {
       console.log('Avatars bucket already exists');
     }
 
-    // Instead of using RPC, we'll directly execute SQL for adding streak columns
-    // This simplifies the process and avoids dependencies on custom functions
+
     try {
       const { data, error } = await supabaseClient.from('profiles').select('id').limit(1);
       
       if (!error) {
-        // If we can query the profiles table, we'll try to add the columns directly
-        // We'll use the profiles table existence as a check instead of trying to call functions
+
         console.log('Profiles table exists, checking for streak columns');
       } else {
         console.error('Error checking profiles table:', error);

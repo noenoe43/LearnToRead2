@@ -62,7 +62,6 @@ export const useExerciseProgress = (): ExerciseProgress => {
       if (error) throw error;
       
       if (data && data.length > 0) {
-        // Group exercises by type and calculate statistics
         const statsByType: Record<string, ExerciseType> = {};
         let totalPoints = 0;
         
@@ -82,12 +81,10 @@ export const useExerciseProgress = (): ExerciseProgress => {
           totalPoints += result.points_earned || 0;
         });
         
-        // Calculate averages
         Object.keys(statsByType).forEach(type => {
           statsByType[type].avgScore = statsByType[type].avgScore / statsByType[type].count;
         });
         
-        // Find problematic exercises
         const problemExercises = data
           .filter(result => (result.score / result.max_score) < 0.7)
           .slice(0, 5);

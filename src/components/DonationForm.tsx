@@ -104,7 +104,7 @@ const DonationForm: React.FC = () => {
       if (error) throw error;
       if (!data.url) throw new Error('No se recibió URL de pago');
       
-      // Redirect to Stripe Checkout
+      //  Stripe Checkout
       window.location.href = data.url;
     } catch (error: any) {
       console.error('Error al iniciar el pago:', error);
